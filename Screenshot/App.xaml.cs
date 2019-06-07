@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Screenshot
 {
@@ -55,6 +57,13 @@ namespace Screenshot
         }
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            MainWindow.Hide();
+            var result = (MainWindow as MainWindow).Result;
+            SetGlobalHotKey(result);
+        }
+
+        private void SetGlobalHotKey(List<Tuple<KeyModifier, Key>> result)
         {
             throw new NotImplementedException();
         }

@@ -21,19 +21,15 @@
         <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center">Set Shortcut Keys</Label>
         <Label Grid.Row="1" Grid.Column="0">Primary Screen</Label>
         <Label Grid.Row="2" Grid.Column="0">Active Window</Label>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Width="100" VerticalAlignment="Center">Ok</Button>
+        <Button Name="Ok" Grid.Row="3" Grid.ColumnSpan="2" Width="100" VerticalAlignment="Center">Ok</Button>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <ComboBox SelectedIndex="0" Name="PrimaryModifier" Margin="0 0 30 0" Height="30">
-                <ComboBoxItem>Ctrl</ComboBoxItem>
-                <ComboBoxItem>Alt</ComboBoxItem>
+            <ComboBox Name="PrimaryModifier" Margin="0 0 30 0" Height="30">
             </ComboBox>
             <ComboBox SelectedIndex="0" Name="PrimaryKey" Height="30">
             </ComboBox>
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
-            <ComboBox SelectedIndex="1" Name="ActiveWindowModifier"  Margin="0 5 30 0" Height="30">
-                <ComboBoxItem>Ctrl</ComboBoxItem>
-                <ComboBoxItem>Alt</ComboBoxItem>
+            <ComboBox Name="ActiveWindowModifier"  Margin="0 5 30 0" Height="30">
             </ComboBox>
             <ComboBox SelectedIndex="0" Name="ActiveWindowKey" Height="30">
             </ComboBox>
