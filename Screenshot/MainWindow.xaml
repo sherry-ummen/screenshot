@@ -5,8 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Screenshot"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStyle="ToolWindow"
+        Title="MainWindow" Height="200" Width="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center">Set Shortcut Keys</Label>
+        <Label Grid.Row="1" Grid.Column="0">Primary Screen</Label>
+        <Label Grid.Row="2" Grid.Column="0">Active Window</Label>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Width="100" VerticalAlignment="Center">Ok</Button>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <ComboBox SelectedIndex="0" Name="PrimaryModifier" Margin="0 0 30 0" Height="30">
+                <ComboBoxItem>Ctrl</ComboBoxItem>
+                <ComboBoxItem>Alt</ComboBoxItem>
+            </ComboBox>
+            <ComboBox SelectedIndex="0" Name="PrimaryKey" Height="30">
+            </ComboBox>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <ComboBox SelectedIndex="1" Name="ActiveWindowModifier"  Margin="0 5 30 0" Height="30">
+                <ComboBoxItem>Ctrl</ComboBoxItem>
+                <ComboBoxItem>Alt</ComboBoxItem>
+            </ComboBox>
+            <ComboBox SelectedIndex="0" Name="ActiveWindowKey" Height="30">
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>

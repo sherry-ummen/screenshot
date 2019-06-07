@@ -30,7 +30,7 @@ namespace Screenshot
         private void CreateContextMenuForSystemTrayIcon()
         {
             _systemTrayIcon.ContextMenuStrip =
-             new System.Windows.Forms.ContextMenuStrip();
+             new ContextMenuStrip();
             _systemTrayIcon.ContextMenuStrip.Items.Add("Shortcut Keys").Click += ShowWindow;
             _systemTrayIcon.ContextMenuStrip.Items.Add("Exit").Click += ExitApp;
         }
@@ -51,7 +51,7 @@ namespace Screenshot
 
         private void ShowWindow(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            MainWindow.Show();
         }
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
