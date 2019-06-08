@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
@@ -32,13 +33,15 @@ namespace Screenshot
 
         private void OnActiveWindowScreenshot()
         {
-            System.Windows.Forms.MessageBox.Show("OnActiveWindowScreenshot");
+            ScreenCapture.ScreenshotOfActiveWindow(GetFileName, ImageFormat.Jpeg);
         }
 
         private void OnPrimaryScreenshot()
         {
-            System.Windows.Forms.MessageBox.Show("OnPrimaryScreenshot");
+            ScreenCapture.FullScreenshotPrimaryMonitor(GetFileName, ImageFormat.Jpeg);
         }
+
+        private string GetFileName => $"Screendhot_{DateTime.Now.ToString("dd.MM.yy.HH.mm.ss.ffff")}.jpeg";
 
         private void SetGlobalHotKey(IEnumerable<Tuple<KeyModifier, Key>> settings, IEnumerable<Action> actions)
         {
