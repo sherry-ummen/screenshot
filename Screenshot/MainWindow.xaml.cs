@@ -29,7 +29,14 @@ namespace Screenshot
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             SetResult();
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void SetResult()
@@ -58,7 +65,7 @@ namespace Screenshot
             PrimaryModifier.ItemsSource = modifier;
             PrimaryModifier.SelectedValue = _userSetValues[0].Item1; ;
             ActiveWindowKey.ItemsSource = keys;
-            ActiveWindowKey.SelectedValue = _userSetValues[1].Item2; 
+            ActiveWindowKey.SelectedValue = _userSetValues[1].Item2;
             ActiveWindowModifier.ItemsSource = modifier;
             ActiveWindowModifier.SelectedValue = _userSetValues[1].Item1;
         }

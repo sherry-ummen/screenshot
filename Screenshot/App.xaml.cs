@@ -16,16 +16,37 @@ namespace Screenshot
     {
         private NotifyIcon _systemTrayIcon;
         private bool _exit;
+        private ShortcutKeys _shortcutKeys;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             MainWindow = new MainWindow();
             MainWindow.Closing += MainWindow_Closing;
-
+            _shortcutKeys = new ShortcutKeys();
             CreateSystemTrayIcon();
             var settings = GetSettings();
             SetSettings(settings);
+            SetGlobalHotKey(settings, new Action[] { OnPrimaryScreenshot, OnActiveWindowScreenshot });
+        }
+
+        private void OnActiveWindowScreenshot()
+        {
+            System.Windows.Forms.MessageBox.Show("OnActiveWindowScreenshot");
+        }
+
+        private void OnPrimaryScreenshot()
+        {
+            System.Windows.Forms.MessageBox.Show("OnPrimaryScreenshot");
+        }
+
+        private void SetGlobalHotKey(IEnumerable<Tuple<KeyModifier, Key>> settings, IEnumerable<Action> actions)
+        {
+            _shortcutKeys.UnRegisterAll();
+            foreach (var item in settings.Zip(actions, (s, a) => new { s, a }))
+            {
+                _shortcutKeys.Register(item.s.Item1, item.s.Item2, item.a);
+            }
         }
 
         private IEnumerable<Tuple<KeyModifier, Key>> GetSettings()
@@ -93,15 +114,20 @@ namespace Screenshot
 
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (_exit) return;
+            if (_exit)
+            {
+                _shortcutKeys.Dispose();
+                return;
+            }
             MainWindow.Hide();
             e.Cancel = true;
             var result = (MainWindow as MainWindow).Result;
-            SetGlobalHotKey(result);
+            SetUserConfigSettings(result);
         }
 
-        private void SetGlobalHotKey(List<Tuple<KeyModifier, Key>> result)
+        private void SetUserConfigSettings(List<Tuple<KeyModifier, Key>> result)
         {
+            SetGlobalHotKey(result, new Action[] { OnPrimaryScreenshot, OnActiveWindowScreenshot });
             Settings.Default.PrimaryScreen = new System.Collections.Specialized.StringCollection();
             Settings.Default.ActiveWindow = new System.Collections.Specialized.StringCollection();
             Settings.Default.PrimaryScreen.Add(result.First().Item1.ToString());
